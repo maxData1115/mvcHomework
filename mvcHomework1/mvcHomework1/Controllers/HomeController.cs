@@ -11,32 +11,19 @@ namespace mvcHomework1.Controllers
     {
         public ActionResult Index()
         {
-            List<string> myFakeIncomeExpense = new List<string>();
-            List<DateTime> myFakePostTime = new List<DateTime>();
-            List<int> myFakeAmount = new List<int>();
+            List<MoneyRecordViewModel> fakeList = new List<MoneyRecordViewModel>();
+
             Random random = new Random();
-
-            for(int i=1; i<=100; i++)
+            for(int i = 0; i <= 99; i++)
             {
-                if (random.Next(2) == 1)
-                {
-                    myFakeIncomeExpense.Add("收入");
-                }
-                else
-                {
-                    myFakeIncomeExpense.Add("支出");
-                }
+                MoneyRecordViewModel fakeData= new MoneyRecordViewModel();
+                fakeData.IncomeExpense= (random.Next() %2==0) ? "收入" : "支出";
+                fakeData.PostTime = DateTime.Now.AddDays(i - 99);
+                fakeData.Amount = random.Next(1000000);
 
-                myFakePostTime.Add(DateTime.Now.AddDays(i-100));
-                myFakeAmount.Add(random.Next(10000));
+                fakeList.Add(fakeData);
             }
-
-            MoenyRecordViewModel viewModel = new MoenyRecordViewModel();
-            viewModel.IncomeExpense = myFakeIncomeExpense;
-            viewModel.PostTime = myFakePostTime;
-            viewModel.Amount = myFakeAmount; 
-
-            return View(viewModel);
+            return View(fakeList);
         }
 
         public ActionResult About()

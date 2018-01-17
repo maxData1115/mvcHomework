@@ -1,4 +1,4 @@
-﻿@model mvcHomework1.ViewModels.MoenyRecordViewModel
+﻿@model List<mvcHomework1.ViewModels.MoneyRecordViewModel>
 
 <div class="row">
     <div class="col-md-12">
@@ -9,14 +9,18 @@
                 <th>日期</th>
                 <th>金額</th>
             </tr>
-            @for (int i = 1; i <= 100; i++)
+            @if (Model != null)
             {
-                <tr>
-                    <td>@i</td>
-                    <td>@Model.IncomeExpense[i-1]</td>
-                    <td>@Model.PostTime[i-1].ToString("yyyy-MM-dd")</td>
-                    <td>@Model.Amount[i-1].ToString("#,#")</td>
-                </tr> 
+                int i = 1;
+                foreach (var modelitem in Model)
+                {
+                    <tr>
+                        <td>@(i++)</td>
+                        <td>@modelitem.IncomeExpense</td>
+                        <td>@modelitem.PostTime.ToString("yyyy-MM-dd")</td>
+                        <td>@modelitem.Amount.ToString("#,#")</td>
+                    </tr>
+                }
             }
         </table>
     </div>
