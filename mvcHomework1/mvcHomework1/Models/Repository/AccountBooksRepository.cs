@@ -15,12 +15,13 @@ namespace mvcHomework1.Models.Repository
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["HomeWorkDB"].ConnectionString;
         
-        public IEnumerable<AccountBooks> GetAccount()
+        public IEnumerable<AccountBooks> GetAccount(int count)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("SELECT *");
+            sb.AppendLine($"SELECT TOP({count}) *");
             sb.AppendLine("FROM AccountBook ab");
             sb.AppendLine("WHERE 1=1");
+            sb.AppendLine("ORDER BY ab.Dateee desc");
 
             try
             {

@@ -21,7 +21,7 @@ namespace mvcHomework1.Controllers
         public ActionResult Index()
         {
             List<MoneyRecordViewModel> recordList = new List<MoneyRecordViewModel>();
-            var items = accountBooksRepository.GetAccount();
+            var items = accountBooksRepository.GetAccount(100);
 
             foreach (var item in items)
             {
