@@ -4,24 +4,23 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using mvcHomework1.ViewModels;
-using mvcHomework1.Models.Domain;
-using mvcHomework1.Models.Repository;
+using mvcHomework1.Service;
 
 namespace mvcHomework1.Controllers
 {
     public class HomeController : Controller
     {
-        AccountBooksRepository accountBooksRepository;
+        AccountBookService accountBooksService;
 
         public HomeController()
         {
-            this.accountBooksRepository = new AccountBooksRepository();
+            this.accountBooksService = new AccountBookService();
         }
 
         public ActionResult Index()
         {
             List<MoneyRecordViewModel> recordList = new List<MoneyRecordViewModel>();
-            var items = accountBooksRepository.GetAccount(100);
+            var items = accountBooksService.GetTopNAccount(100);
 
             foreach (var item in items)
             {

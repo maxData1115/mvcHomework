@@ -163,6 +163,7 @@
     <Compile Include="Models\Domain\AccountBooks.cs" />
     <Compile Include="Models\Repository\AccountBooksRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\Service\AccountBookService.cs" />
     <Compile Include="ViewModels\MoneyRecordViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
