@@ -4,40 +4,35 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using mvcHomework1.ViewModels;
+using mvcHomework1.Models.Domain;
+using mvcHomework1.Models.Repository;
 
 namespace mvcHomework1.Controllers
 {
     public class HomeController : Controller
     {
+        AccountBooksRepository accountBooksRepository;
+
+        public HomeController()
+        {
+            this.accountBooksRepository = new AccountBooksRepository();
+        }
+
         public ActionResult Index()
         {
-            List<MoneyRecordViewModel> fakeList = new List<MoneyRecordViewModel>();
+            List<MoneyRecordViewModel> recordList = new List<MoneyRecordViewModel>();
+            var items = accountBooksRepository.GetAccount();
 
-            Random random = new Random();
-            for(int i = 0; i <= 99; i++)
+            foreach (var item in items)
             {
-                MoneyRecordViewModel fakeData= new MoneyRecordViewModel();
-                fakeData.IncomeExpense= (random.Next() %2==0) ? "收入" : "支出";
-                fakeData.PostTime = DateTime.Now.AddDays(i - 99);
-                fakeData.Amount = random.Next(1000000);
+                MoneyRecordViewModel viewModel = new MoneyRecordViewModel();
+                viewModel.IncomeExpense = item.Categoryyy == 0 ? "支出" : "收入";
+                viewModel.PostTime = item.Dateee;
+                viewModel.Amount = item.Amounttt;
 
-                fakeList.Add(fakeData);
+                recordList.Add(viewModel);
             }
-            return View(fakeList);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(recordList);
         }
     }
 }

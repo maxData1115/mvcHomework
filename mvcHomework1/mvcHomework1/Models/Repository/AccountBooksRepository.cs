@@ -14,6 +14,7 @@ namespace mvcHomework1.Models.Repository
     public class AccountBooksRepository
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["HomeWorkDB"].ConnectionString;
+        
         public IEnumerable<AccountBooks> GetAccount()
         {
             StringBuilder sb = new StringBuilder();
@@ -22,7 +23,7 @@ namespace mvcHomework1.Models.Repository
             sb.AppendLine("WHERE 1=1");
 
             try
-            {              
+            {
                 using (SqlConnection conn = new SqlConnection(this.connectionString))
                 {
                     return conn.Query<AccountBooks>(sb.ToString());
