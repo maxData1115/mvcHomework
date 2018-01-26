@@ -22,15 +22,12 @@ namespace mvcHomework1.Controllers
             List<MoneyRecordViewModel> recordList = new List<MoneyRecordViewModel>();
             var items = accountBooksService.GetTopNAccount(100);
 
-            foreach (var item in items)
-            {
-                MoneyRecordViewModel viewModel = new MoneyRecordViewModel();
-                viewModel.IncomeExpense = item.Categoryyy == 0 ? "支出" : "收入";
-                viewModel.PostTime = item.Dateee;
-                viewModel.Amount = item.Amounttt;
+            recordList=items.Select(d => new MoneyRecordViewModel{
+                IncomeExpense = d.Categoryyy == 0 ? "支出" : "收入",
+                PostTime = d.Dateee,
+                Amount = d.Amounttt,
+            }).ToList();
 
-                recordList.Add(viewModel);
-            }
             return View(recordList);
         }
     }
