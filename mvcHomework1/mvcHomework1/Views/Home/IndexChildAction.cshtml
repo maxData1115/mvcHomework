@@ -1,4 +1,8 @@
-﻿@model List<mvcHomework1.ViewModels.MoneyRecordViewModel>
+﻿@{
+    Layout = null;
+}
+
+@model List<mvcHomework1.ViewModels.MoneyRecordViewModel>
 
 <div class="row">
     <div class="col-md-12">
@@ -17,7 +21,7 @@
                     <tr>
                         <td>@(i++)</td>
                         <td>@modelitem.IncomeExpense</td>
-                        <td>@modelitem.PostTime.ToString("yyyy-MM-dd")</td>
+                        <td>@Html.DisplayFor(m=> modelitem.PostTime)</td>
                         <td>@modelitem.Amount.ToString("#,#")</td>
                     </tr>
                 }

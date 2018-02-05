@@ -35,5 +35,27 @@ namespace mvcHomework1.Models.Repository
                 throw new Exception("GetAccount(): " + ex.Message);
             }
         }
+        
+        public void AddAccount(Guid id, int category, decimal amount, DateTime date, string remark)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Insert into AccountBook(Id, Categoryyy, Amounttt, Dateee, Remarkkk)");
+            sb.AppendLine($"Values({id}, {category}, { amount}, { date}, { remark})");
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(this.connectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sb.ToString(), conn))
+                    {
+                        conn.Open();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("AddAccount(): " + ex.Message);
+            }
+        }
     }
 }
