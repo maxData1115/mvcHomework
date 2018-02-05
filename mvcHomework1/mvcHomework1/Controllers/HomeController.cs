@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using mvcHomework1.ViewModels;
 using mvcHomework1.Service;
 using mvcHomework1.Enum;
+using mvcHomework1.ViewModels;
 
 namespace mvcHomework1.Controllers
 {
@@ -20,7 +21,10 @@ namespace mvcHomework1.Controllers
 
         public ActionResult Index()
         {
-            return View(new MyEnum());
+            MoneyRecordViewModel viewModel=new MoneyRecordViewModel();
+            viewModel.PostTime = DateTime.Now;
+       
+            return View(viewModel);
         }
 
         [ChildActionOnly]
@@ -42,13 +46,16 @@ namespace mvcHomework1.Controllers
             return View(recordList);
         }
 
-        public ActionResult AddRecord(IncomeExpenseEnums category, decimal money, DateTime date,string description)
+        public ActionResult AddRecord(ViewModels.MoneyRecordViewModel data)
         {
-            //accountBooksService = new AccountBookService();
+            if (ModelState.IsValid)
+            {
+                Guid id = Guid.NewGuid();
+                accountBooksService.AddNewAccount(id,data);
+                return RedirectToAction("Index");
+            }
 
-            Guid id = Guid.NewGuid();
-            accountBooksService.AddNewAccount(id,category,money,date,description);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", data);
         }
     }
 }

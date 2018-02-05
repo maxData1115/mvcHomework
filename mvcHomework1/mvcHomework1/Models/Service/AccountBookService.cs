@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using mvcHomework1.Enum;
 using mvcHomework1.Models.Domain;
 using mvcHomework1.Models.Repository;
+using mvcHomework1.ViewModels;
 
 namespace mvcHomework1.Service
 {
@@ -23,9 +24,9 @@ namespace mvcHomework1.Service
             return accountBooksRepository.GetAccount(count);
         }
 
-        public void AddNewAccount(Guid id,IncomeExpenseEnums category, decimal amount, DateTime date, string remark)
+        public void AddNewAccount(Guid id,ViewModels.MoneyRecordViewModel data)
         {
-            accountBooksRepository.AddAccount(id,(int)category,(int)amount,date,remark);
+            accountBooksRepository.AddAccount(id,(int)data.IncomeExpense,(int)data.Amount,data.PostTime,data.Remark);
         }
     }
 
