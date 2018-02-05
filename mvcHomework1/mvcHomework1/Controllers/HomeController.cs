@@ -13,6 +13,11 @@ namespace mvcHomework1.Controllers
     {
         AccountBookService accountBooksService;
 
+        public HomeController()
+        {
+            this.accountBooksService=new AccountBookService();
+        }
+
         public ActionResult Index()
         {
             return View(new MyEnum());
@@ -21,7 +26,7 @@ namespace mvcHomework1.Controllers
         [ChildActionOnly]
         public ActionResult IndexChildAction()
         {
-            accountBooksService= new AccountBookService();
+            //accountBooksService= new AccountBookService();
             List<MoneyRecordViewModel> recordList = new List<MoneyRecordViewModel>();
             var items = accountBooksService.GetTopNAccount(100);
 
@@ -31,6 +36,7 @@ namespace mvcHomework1.Controllers
                 IncomeExpense = (IncomeExpenseEnums)d.Categoryyy,
                 PostTime = d.Dateee,
                 Amount = d.Amounttt,
+                Remark = d.Remarkkk
             }).ToList();
 
             return View(recordList);
@@ -38,7 +44,11 @@ namespace mvcHomework1.Controllers
 
         public ActionResult AddRecord(IncomeExpenseEnums category, decimal money, DateTime date,string description)
         {
-            return Content("YES");
+            //accountBooksService = new AccountBookService();
+
+            Guid id = Guid.NewGuid();
+            accountBooksService.AddNewAccount(id,category,money,date,description);
+            return RedirectToAction("Index");
         }
     }
 }

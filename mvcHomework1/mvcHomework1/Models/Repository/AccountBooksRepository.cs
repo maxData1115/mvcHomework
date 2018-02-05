@@ -36,19 +36,26 @@ namespace mvcHomework1.Models.Repository
             }
         }
         
-        public void AddAccount(Guid id, int category, decimal amount, DateTime date, string remark)
+        public void AddAccount(Guid id, int category, int amount, DateTime date, string remark)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Insert into AccountBook(Id, Categoryyy, Amounttt, Dateee, Remarkkk)");
-            sb.AppendLine($"Values({id}, {category}, { amount}, { date}, { remark})");
+            sb.AppendLine("Values(@id, @category, @amount, @date, @remark)");
 
             try
             {
                 using (SqlConnection conn = new SqlConnection(this.connectionString))
                 {
-                    using (SqlCommand cmd = new SqlCommand(sb.ToString(), conn))
+                    using ( SqlCommand cmd = new SqlCommand(sb.ToString(), conn))
                     {
                         conn.Open();
+                        cmd.Parameters.Add("@id", SqlDbType.UniqueIdentifier).Value = id;
+                        cmd.Parameters.Add("@category", SqlDbType.Int).Value = category;
+                        cmd.Parameters.Add("@amount", SqlDbType.Int).Value = amount;
+                        cmd.Parameters.Add("@date", SqlDbType.DateTime).Value = date;
+                        cmd.Parameters.Add("@remark", SqlDbType.NVarChar).Value = remark;
+
+                        cmd.ExecuteNonQuery();
                     }
                 }
             }
