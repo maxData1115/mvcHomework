@@ -17,7 +17,8 @@ namespace mvcHomework1.ViewModels
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime PostTime { get; set; }
 
-        [Required]     
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:#,#}")]
         public Decimal Amount { get; set; }
 
         [Required]

@@ -11,10 +11,4 @@ namespace mvcHomework1.Enum
         支出 =0,
         收入=1
     }
-
-    public class MyEnum
-    {
-        public IncomeExpenseEnums Category{ get; set; }
-    }
-
 }
