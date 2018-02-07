@@ -10,7 +10,7 @@
 <div class="container body-content">
 
     <div class="well">
-        @using (Html.BeginForm("AddRecord", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+        @using(Ajax.BeginForm("AddRecord","Home",null,null,new{@class="form-horizontal"}))
         {
             <div class="form-group">
                 @Html.LabelFor(m => m.Amount, new { @class = "col-sm-2 control-label" })
