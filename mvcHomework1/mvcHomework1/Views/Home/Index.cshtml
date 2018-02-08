@@ -13,7 +13,7 @@
         @using(Ajax.BeginForm("AddRecord","Home",null,null,new{@class="form-horizontal"}))
         {
             <div class="form-group">
-                @Html.LabelFor(m => m.Amount, new { @class = "col-sm-2 control-label" })
+                @Html.LabelFor(m => m.IncomeExpense, new { @class = "col-sm-2 control-label" })
                 <div class="col-sm-10">
                     @Html.EnumDropDownListFor(m => m.IncomeExpense, new { @class = "form-control" })
                 </div>
